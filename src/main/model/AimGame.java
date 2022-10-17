@@ -64,14 +64,11 @@ public class AimGame {
     }
 
     // Adds a new random target onto the screen.
-    // REQUIRES: targets.size() <= 10 (to reduce lag)
     // MODIFIES: this
     // EFFECTS:  A new target with randomized x and y coordinates is added to targets.
     public void addRandomTarget() {
         int randx = rand.nextInt(DIMENSION1 - Target.SIZE) + Target.SIZE / 2;
         int randy = rand.nextInt(DIMENSION2 - Target.SIZE) + Target.SIZE / 2;
-        if (targets.getTargets().size() < 10) {
-            targets.addTarget(randx, randy);
-        }
+        targets.addTarget(randx, randy);
     }
 }

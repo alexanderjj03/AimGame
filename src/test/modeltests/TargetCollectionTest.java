@@ -1,5 +1,8 @@
-package model;
+package modeltests;
 
+import model.AimGame;
+import model.Target;
+import model.TargetCollection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,9 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /*
- * Unit tests for the Target and TargetCollection class.
+ * Unit tests for the TargetCollection class.
  */
-class TargetsTest {
+public class TargetCollectionTest {
     private static final int XCOORD = AimGame.DIMENSION1 / 2;
     private static final int YCOORD = AimGame.DIMENSION2 / 2;
     private Target t;
@@ -24,27 +27,6 @@ class TargetsTest {
         targets = new TargetCollection();
         targets.addTarget(XCOORD, YCOORD);
         targets.addTarget(XCOORD, YCOORD);
-    }
-
-    @Test
-    void testGetX() {
-        assertEquals(XCOORD, t.getX());
-    }
-
-    @Test
-    void testGetY() {
-        assertEquals(YCOORD, t.getY());
-    }
-
-    @Test
-    void testHasBeenClicked() {
-        assertTrue(t.hasBeenClicked(XCOORD, YCOORD));
-        assertFalse(t.hasBeenClicked(XCOORD + 6, YCOORD + 8));
-        assertTrue(t.hasBeenClicked(XCOORD + 7, YCOORD + 7));
-        assertFalse(t.hasBeenClicked(XCOORD - 6, YCOORD - 8));
-        assertTrue(t.hasBeenClicked(XCOORD - 7, YCOORD - 7));
-        assertTrue(t.hasBeenClicked(XCOORD + 1, YCOORD + 9));
-        assertFalse(t.hasBeenClicked(XCOORD, YCOORD + 10));
     }
 
     @Test
@@ -73,5 +55,6 @@ class TargetsTest {
 
         targets.clearTargets();
         assertEquals(0, targets.getTargets().size());
+        assertFalse(targets.removedClickedTarget(0, 0));
     }
 }
