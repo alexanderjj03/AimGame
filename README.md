@@ -24,9 +24,11 @@ user stories below.
 
 As a user, I want to be able to:
 - Start a new game with a specified number of targets on screen
-- Remove a target from the screen by clicking it
+- Remove a target from the screen by clicking it, and have a new target appear
+at a random location
 - **Manually add a target to the screen at any point in the game**
 - Clear the screen and end the game early
+- (THE FOLLOWING STORIES HAVE NOT BEEN IMPLEMENTED YET)
 - See my target accuracy on the screen (targets hit/times clicked)
 - Control the size of the targets that appear on the screen
 - Control the shape of the targets
