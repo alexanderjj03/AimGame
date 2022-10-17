@@ -32,9 +32,6 @@ public class GamePanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawTargets(g);
-        if (game.isGameOver()) {
-            gameOver(g);
-        }
     }
 
     // Draw the targets
@@ -48,13 +45,6 @@ public class GamePanel extends JPanel {
             g.fillOval(t.getX() - Target.SIZE / 2, t.getY() - Target.SIZE / 2, Target.SIZE, Target.SIZE);
         }
         g.setColor(savedCol);
-    }
-
-    // Draws the "game over" message and replay instructions (NOT IMPLEMENTED YET)
-    // MODIFIES: g
-    // EFFECTS:  draws "game over" and replay instructions onto g
-    private void gameOver(Graphics g) {
-        return;
     }
 
 }

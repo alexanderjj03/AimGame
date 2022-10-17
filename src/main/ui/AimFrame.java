@@ -77,6 +77,7 @@ public class AimFrame extends JFrame {
      * A mouse handler to respond to mouse events
      */
     private class MouseHandler extends MouseAdapter {
+        @Override
         public void mousePressed(MouseEvent m) {
             game.mousePressed(m);
         }

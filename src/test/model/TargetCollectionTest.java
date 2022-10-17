@@ -15,12 +15,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TargetCollectionTest {
     private static final int XCOORD = AimGame.DIMENSION1 / 2;
     private static final int YCOORD = AimGame.DIMENSION2 / 2;
-    private Target t;
     private TargetCollection targets;
 
     @BeforeEach
     void runBefore() {
-        t = new Target(XCOORD, YCOORD);
+        Target t = new Target(XCOORD, YCOORD);
         targets = new TargetCollection();
         targets.addTarget(XCOORD, YCOORD);
         targets.addTarget(XCOORD, YCOORD);

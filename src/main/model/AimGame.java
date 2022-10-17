@@ -13,14 +13,12 @@ public class AimGame {
     private static final Random rand = new Random();
 
     private TargetCollection targets;
-    private boolean stopGame;
 
     // Constructs an aim trainer game.
     // REQUIRES: startingTargetNum >= 1
     // EFFECTS:  Creates startingTargetNum random targets across the screen
     public AimGame(int startingTargetNum) {
         targets = new TargetCollection();
-        stopGame = false;
         for (int i = 0; i < startingTargetNum; i++) {
             addRandomTarget();
         }
@@ -28,12 +26,6 @@ public class AimGame {
 
     public TargetCollection getTargetCollection() {
         return targets;
-    }
-
-    // Is game over? (WILL BE USED LATER)
-    // EFFECTS:  returns true if game is over, false otherwise
-    public boolean isGameOver() {
-        return stopGame;
     }
 
     // Responds to key press codes
