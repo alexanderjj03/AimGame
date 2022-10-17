@@ -12,7 +12,7 @@ public class TargetCollection {
     // Constructs an empty target collection
     // EFFECTS: Creates an empty arraylist of type target
     public TargetCollection() {
-        targets = new ArrayList<Target>();
+        targets = new ArrayList<>();
     }
 
     public List<Target> getTargets() {
@@ -32,7 +32,7 @@ public class TargetCollection {
     // EFFECTS:  The first target in targets is removed from the list.
     public void removeTarget() {
         if (targets.size() >= 1) {
-            targets.remove(targets.get(0));
+            targets.remove(targets.get(targets.size() - 1));
         }
     }
 
@@ -40,7 +40,7 @@ public class TargetCollection {
     // MODIFIES: this
     // EFFECTS:  All targets are removed from the list.
     public void clearTargets() {
-        targets = new ArrayList<Target>();
+        targets = new ArrayList<>();
     }
 
     // Assumes a mouse pointer has clicked at coordinates x, y. If there is a target there, remove it, return true.

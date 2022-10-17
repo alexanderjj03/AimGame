@@ -39,15 +39,13 @@ public class TargetCollectionTest {
         assertEquals(1, targets.getTargets().size());
         targets.addTarget(XCOORD - 50, YCOORD - 50);
         targets.removeTarget();
-        assertEquals(YCOORD - 50, targets.getTargets().get(0).getY());
+        assertEquals(YCOORD, targets.getTargets().get(0).getY());
         targets.addTarget(XCOORD + 50, YCOORD + 50);
 
-        assertFalse(targets.removedClickedTarget(XCOORD, YCOORD));
+        assertFalse(targets.removedClickedTarget(XCOORD + 25, YCOORD + 25));
         targets.addTarget(XCOORD + 50, YCOORD + 50);
         assertTrue(targets.removedClickedTarget(XCOORD + 50, YCOORD + 50));
         assertEquals(2, targets.getTargets().size());
-        assertTrue(targets.removedClickedTarget(XCOORD + 50, YCOORD + 50));
-        assertEquals(1, targets.getTargets().size());
 
         targets.clearTargets();
         assertEquals(0, targets.getTargets().size());
