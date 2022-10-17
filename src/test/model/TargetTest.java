@@ -1,6 +1,5 @@
-package modeltests;
+package model;
 
-import model.Target;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

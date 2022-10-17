@@ -1,8 +1,5 @@
-package modeltests;
+package model;
 
-import model.AimGame;
-import model.Target;
-import model.TargetCollection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
