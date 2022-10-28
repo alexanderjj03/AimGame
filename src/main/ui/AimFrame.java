@@ -10,27 +10,38 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.Timer;
+import java.io.IOException;
 import java.util.Scanner;
-
-import model.TargetCollection;
-import model.Target;
-import model.AimGame;
+import persistence.JsonReader;
 
 /*
  * Initializes the game. The following code is inspired by lab 3.
  */
 public class AimFrame extends JFrame {
     private static final int INTERVAL = 20;
+    private static final String JSON_STORE = "./data/aimgame.json";
     private AimGame game;
     private GamePanel gp;
+    private JsonReader jsonReader;
+    private int startingTargs;
 
     // Constructs main window
     // EFFECTS: sets up window in which the aim game will be played
-    public AimFrame(int startingTargs) {
-        super("Paddle Ball");
+    public AimFrame() {
+        super("Aim Game");
+        Scanner sc = new Scanner(System.in);
+        jsonReader = new JsonReader(JSON_STORE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(true);
-        game = new AimGame(startingTargs);
+        System.out.println("Would you like to load your saved game? Enter 'y' to load, or any other input to not.");
+        String input = sc.nextLine();
+        if (input.equalsIgnoreCase("y")) {
+            loadAimGame();
+        } else {
+            System.out.println("Alright, how many random targets would you like to start with?");
+            startingTargs = sc.nextInt();
+            game = new AimGame(startingTargs, false);
+        }
         gp = new GamePanel(game);
         add(gp);
         addKeyListener(new KeyHandler());
@@ -83,13 +94,17 @@ public class AimFrame extends JFrame {
         }
     }
 
-    /*
-     * Play the game (incomplete, will add a system to ensure that numtarg >= 1)
-     */
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("How many targets would you like to start with?");
-        int numtargs = sc.nextInt();
-        new AimFrame(numtargs);
+    // MODIFIES: this
+    // EFFECTS: loads aimgame from file
+    private void loadAimGame() {
+        try {
+            game = jsonReader.read();
+            System.out.println("Loaded AimGame from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+            System.exit(0);
+        }
     }
+
+
 }

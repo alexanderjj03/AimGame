@@ -1,12 +1,16 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /*
  * Represents a list of targets that will all be on the screen simultaneously
  */
-public class TargetCollection {
+public class TargetCollection implements Writable {
     private List<Target> targets;
 
     // Constructs an empty target collection
@@ -56,5 +60,23 @@ public class TargetCollection {
             }
         }
         return false;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("targets", targetsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns targets in this collection as a JSON array. Taken from the P2 sample application
+    private JSONArray targetsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Target t : targets) {
+            jsonArray.put(t.toJson());
+        }
+
+        return jsonArray;
     }
 }

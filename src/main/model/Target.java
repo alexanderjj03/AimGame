@@ -1,17 +1,20 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.awt.Color;
 import java.lang.Math;
 
 /*
  * Represents a circular target on the screen.
  */
-public class Target {
+public class Target implements Writable {
     public static final int SIZE = 20;  // must be an even integer
     public static final Color COLOR = new Color(91, 39, 204);
 
-    private double xcoord;
-    private double ycoord;
+    private int xcoord;
+    private int ycoord;
 
     // Constructs a target
     // REQUIRES: x and y are within the screen's dimensions
@@ -22,11 +25,11 @@ public class Target {
     }
 
     public int getX() {
-        return (int) xcoord;
+        return xcoord;
     }
 
     public int getY() {
-        return (int) ycoord;
+        return ycoord;
     }
 
     // Checks if a mouse pointer has clicked the target
@@ -35,5 +38,13 @@ public class Target {
         double pointerDistance = Math.sqrt(Math.pow(x - xcoord, 2) + Math.pow(y - ycoord, 2));
         // pythagorean theorem
         return (pointerDistance < (SIZE / 2.0));
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("x", xcoord);
+        json.put("y", ycoord);
+        return json;
     }
 }

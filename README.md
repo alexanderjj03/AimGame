@@ -26,8 +26,13 @@ As a user, I want to be able to:
 - Start a new game with a specified number of targets on screen
 - Remove a target from the screen by clicking it, and have a new target appear
 at a random location
-- **Manually add a target to the screen at any point in the game**
+- **Manually add or remove a target to the screen at any point in the game**
 - Clear the screen and end the game early
+- Restart the game by removing all present targets from the screen, and adding
+one new one at a random location.
+- Be reminded to save my game to file when ending the game and have the option
+to do so or not.
+- Have the option to load the saved game upon starting the application.
 - (THE FOLLOWING STORIES HAVE NOT BEEN IMPLEMENTED YET)
 - See my target accuracy on the screen (targets hit/times clicked)
 - Control the size of the targets that appear on the screen

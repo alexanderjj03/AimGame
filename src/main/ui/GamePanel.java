@@ -9,14 +9,11 @@ import javax.swing.JPanel;
 
 import model.TargetCollection;
 import model.Target;
-import model.AimGame;
 
 /*
  * The panel in which the game is rendered. The following code is inspired by Lab 3.
  */
 public class GamePanel extends JPanel {
-    private static final String OVER = "Game Over!";
-    private static final String REPLAY = "J to replay";
     private AimGame game;
 
     // Constructs a game panel
@@ -32,6 +29,7 @@ public class GamePanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawTargets(g);
+        drawAccuracy(g);
     }
 
     // Draw the targets
@@ -47,4 +45,23 @@ public class GamePanel extends JPanel {
         g.setColor(savedCol);
     }
 
+    // Draws the user's accuracy at the top of the screen
+    // MODIFIES: g
+    // EFFECTS:  draws "game over" and replay instructions onto g
+    private void drawAccuracy(Graphics g) {
+        Color saved = g.getColor();
+        g.setColor(new Color(0, 0, 0));
+        g.setFont(new Font("Arial", 20, 20));
+        FontMetrics fm = g.getFontMetrics();
+        centreString("Accuracy: " + game.getAccuracy() + "%", g, fm, 30);
+        g.setColor(saved);
+    }
+
+    // Centres a string on the screen (From lab 3)
+    // MODIFIES: g
+    // EFFECTS:  centres the string str horizontally onto g at vertical position y
+    private void centreString(String str, Graphics g, FontMetrics fm, int y) {
+        int width = fm.stringWidth(str);
+        g.drawString(str, (AimGame.DIMENSION1 - width) / 2, y);
+    }
 }
