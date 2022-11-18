@@ -47,6 +47,10 @@ at a random location.
 - You can generate the second required event related to adding Xs to a Y by
 clicking q when the game is active. This removes the most recently added
 target from the game's target collection (and so it disappears off the screen).
+- Not required, but you can generate a third event related to adding Xs to a Y
+by left clicking any of the targets (purple circles) on the screen. That target
+is removed from the game's target collection and a new one is added at a random
+location.
 - You can locate my visual component by clicking run on main. The first image
 that appears is the visual component. It's more or less the game's introduction.
 - You can save the state of my application by clicking x while the game is
