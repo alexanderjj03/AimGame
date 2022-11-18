@@ -38,6 +38,12 @@ class TargetTest {
     }
 
     @Test
+    void testSetSize() {
+        t.setSize(50);
+        assertEquals(50, t.getSize());
+    }
+
+    @Test
     void testHasBeenClicked() {
         int radius = SIZE/2;
         assertTrue(t.hasBeenClicked(XCOORD, YCOORD));

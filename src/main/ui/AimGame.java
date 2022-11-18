@@ -10,7 +10,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.util.Random;
-import java.util.Scanner;
 
 /*
  * Represents a game of this aim trainer.
@@ -26,7 +25,6 @@ public class AimGame extends JFrame implements Writable {
     private int clicks;
     private int startingTargets;
     private JsonWriter jsonWriter;
-    private Scanner sc;
 
     // Constructs an aim trainer game.
     // REQUIRES: startingTargetNum >= 1, size is even
@@ -38,7 +36,6 @@ public class AimGame extends JFrame implements Writable {
         clicks = 0;
         startingTargets = startingTargetNum;
         jsonWriter = new JsonWriter(JSON_STORE);
-        sc = new Scanner(System.in);
         if (loaded == false) {
             for (int i = 0; i < startingTargetNum; i++) {
                 addRandomTarget();
