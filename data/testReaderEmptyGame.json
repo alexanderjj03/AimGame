@@ -1,6 +1,8 @@
 {
     "hits": 5,
     "clicks": 23,
-    "targets": {"targets": []},
+    "targets": {
+        "target size": 20,
+        "targets": []},
     "starting targets": 0
 }

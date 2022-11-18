@@ -14,11 +14,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class TargetTest {
     private static final int XCOORD = 100;
     private static final int YCOORD = 100;
+    private static final int SIZE = 20;
     private Target t;
 
     @BeforeEach
     void runBefore() {
-        t = new Target(XCOORD, YCOORD);
+        t = new Target(XCOORD, YCOORD, SIZE);
     }
 
     @Test
@@ -32,16 +33,22 @@ class TargetTest {
     }
 
     @Test
+    void testGetSize() {
+        assertEquals(SIZE, t.getSize());
+    }
+
+    @Test
     void testHasBeenClicked() {
+        int radius = SIZE/2;
         assertTrue(t.hasBeenClicked(XCOORD, YCOORD));
-        assertFalse(t.hasBeenClicked(XCOORD + 6, YCOORD + 8));
-        assertTrue(t.hasBeenClicked(XCOORD + 7, YCOORD + 7));
+        assertFalse(t.hasBeenClicked(XCOORD + (radius * 0.6), YCOORD + (radius * 0.8)));
+        assertTrue(t.hasBeenClicked(XCOORD + (radius * 0.7), YCOORD + (radius * 0.7)));
 
-        assertFalse(t.hasBeenClicked(XCOORD - 8, YCOORD + 8));
-        assertFalse(t.hasBeenClicked(XCOORD - 70, YCOORD - 34));
+        assertFalse(t.hasBeenClicked(XCOORD - (radius * 0.8), YCOORD + (radius * 0.8)));
+        assertFalse(t.hasBeenClicked(XCOORD - (radius * 4), YCOORD - (radius * 5)));
 
-        assertTrue(t.hasBeenClicked(XCOORD, YCOORD - 9));
-        assertFalse(t.hasBeenClicked(XCOORD, YCOORD - 10));
+        assertTrue(t.hasBeenClicked(XCOORD, YCOORD - (radius - 1)));
+        assertFalse(t.hasBeenClicked(XCOORD, YCOORD - radius));
     }
 
 }

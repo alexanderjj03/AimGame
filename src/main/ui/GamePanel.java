@@ -40,14 +40,15 @@ public class GamePanel extends JPanel {
         Color savedCol = g.getColor();
         g.setColor(Target.COLOR);
         for (Target t : targets.getTargets()) {
-            g.fillOval(t.getX() - Target.SIZE / 2, t.getY() - Target.SIZE / 2, Target.SIZE, Target.SIZE);
+            g.fillOval(t.getX() - targets.getTargetSize() / 2, t.getY() - targets.getTargetSize() / 2,
+                    targets.getTargetSize(), targets.getTargetSize());
         }
         g.setColor(savedCol);
     }
 
     // Draws the user's accuracy at the top of the screen
     // MODIFIES: g
-    // EFFECTS:  draws "game over" and replay instructions onto g
+    // EFFECTS:  draws accuracy % onto g
     private void drawAccuracy(Graphics g) {
         Color saved = g.getColor();
         g.setColor(new Color(0, 0, 0));

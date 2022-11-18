@@ -12,28 +12,38 @@ import java.util.List;
  */
 public class TargetCollection implements Writable {
     private List<Target> targets;
+    private int targetSize;
 
     // Constructs an empty target collection
-    // EFFECTS: Creates an empty arraylist of type target
-    public TargetCollection() {
+    // EFFECTS: Creates an empty arraylist of type target and establishes the size of all the targets in the list.
+    public TargetCollection(int size) {
         targets = new ArrayList<>();
+        targetSize = size;
     }
 
     public List<Target> getTargets() {
         return targets;
     }
 
+    public void setTargetSize(int size) {
+        targetSize = size;
+    }
+
+    public int getTargetSize() {
+        return targetSize;
+    }
+
     // Adds a new target onto the screen
     // REQUIRES: x and y are within the screen's dimensions
     // MODIFIES: this
-    // EFFECTS:  A new target is added to targets at coordinates x, y
+    // EFFECTS:  A new target is added to targets at coordinates x, y with size targetSize
     public void addTarget(int x, int y) {
-        targets.add(new Target(x, y));
+        targets.add(new Target(x, y, targetSize));
     }
 
     // Removes a target from the screen
     // MODIFIES: this
-    // EFFECTS:  The first target in targets is removed from the list.
+    // EFFECTS:  The most recently added target in targets is removed from the list.
     public void removeTarget() {
         if (targets.size() >= 1) {
             targets.remove(targets.get(targets.size() - 1));
@@ -66,6 +76,7 @@ public class TargetCollection implements Writable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("targets", targetsToJson());
+        json.put("target size", targetSize);
         return json;
     }
 

@@ -1,10 +1,10 @@
 package ui;
 
-import model.Target;
 import model.TargetCollection;
 import org.json.JSONObject;
 import persistence.JsonWriter;
 import persistence.Writable;
+import javax.swing.*;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyEvent;
@@ -15,10 +15,10 @@ import java.util.Scanner;
 /*
  * Represents a game of this aim trainer.
  */
-public class AimGame implements Writable {
+public class AimGame extends JFrame implements Writable {
     private static final String JSON_STORE = "./data/aimgame.json";
     public static final int DIMENSION1 = 800;
-    public static final int DIMENSION2 = 600;
+    public static final int DIMENSION2 = 700;
     private static final Random rand = new Random();
 
     private TargetCollection targets;
@@ -29,11 +29,11 @@ public class AimGame implements Writable {
     private Scanner sc;
 
     // Constructs an aim trainer game.
-    // REQUIRES: startingTargetNum >= 1
-    // EFFECTS:  Creates startingTargetNum random targets across the screen if the game isn't loaded from a file.
-    // Initializes hits and clicks.
-    public AimGame(int startingTargetNum, boolean loaded) {
-        targets = new TargetCollection();
+    // REQUIRES: startingTargetNum >= 1, size is even
+    // EFFECTS:  Creates startingTargetNum random targets of size "size" across the screen if the game isn't loaded
+    // from a file. Initializes hits and clicks.
+    public AimGame(int startingTargetNum, int size, boolean loaded) {
+        targets = new TargetCollection(size);
         hits = 0;
         clicks = 0;
         startingTargets = startingTargetNum;
@@ -85,10 +85,11 @@ public class AimGame implements Writable {
 
     // Responds to key press codes
     // MODIFIES: this
-    // EFFECTS:  Adds and removes targets, or closes the game in response to
-    //           given key pressed codes (space, q, and x)
+    // EFFECTS:  Adds and removes targets, or closes the game in response to given key pressed codes (space, q, and x).
+    // Space adds a target at a random location (if there are <20 targets on screen), q removes the most recently
+    // added target, r restarts the game, and x ends the game and asks the user if they want to save it.
     public void keyPressed(int keyCode) {
-        if (keyCode == KeyEvent.VK_SPACE) {
+        if ((keyCode == KeyEvent.VK_SPACE) && (targets.getTargets().size() < 20)) {
             addRandomTarget();
         } else if (keyCode == KeyEvent.VK_Q) {
             targets.removeTarget();
@@ -96,16 +97,27 @@ public class AimGame implements Writable {
             targets.clearTargets();
             hits = 0;
             clicks = 0;
-            for (int i = 0; i < startingTargets; i++) {
-                addRandomTarget();
-            }
+            addRandomTarget();
         } else if (keyCode == KeyEvent.VK_X) {
-            System.out.println("Would you like to save your game? Enter 'y' to save, or any other input to not.");
-            String input = sc.nextLine();
-            if (input.equalsIgnoreCase("y")) {
-                saveAimGame();
-            }
+            endandSaveGame();
             System.exit(0);
+        }
+    }
+
+    // EFFECTS: Sets up a pop up window for the user to decide whether to save their game.
+    private void endandSaveGame() {
+        JFrame frame = new JFrame();
+        int n = JOptionPane.showConfirmDialog(frame, "Would you like to save your game?",
+                "Save?", JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION) {
+            boolean successfullySaved = saveAimGame();
+            if (successfullySaved) {
+                JOptionPane.showMessageDialog(frame, "Saved game to " + JSON_STORE);
+            } else {
+                JOptionPane.showMessageDialog(frame, "Unable to write to file: " + JSON_STORE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(frame, "Have a great day!");
         }
     }
 
@@ -128,22 +140,23 @@ public class AimGame implements Writable {
 
     // Adds a new random target onto the screen.
     // MODIFIES: this
-    // EFFECTS:  A new target with randomized x and y coordinates is added to targets.
+    // EFFECTS:  A new target with randomized x and y coordinates is added to targets. Space is left at the top and
+    // bottom.
     public void addRandomTarget() {
-        int randx = rand.nextInt(DIMENSION1 - Target.SIZE) + Target.SIZE / 2;
-        int randy = rand.nextInt(DIMENSION2 - Target.SIZE) + Target.SIZE / 2;
+        int randx = rand.nextInt(DIMENSION1 - targets.getTargetSize()) + targets.getTargetSize() / 2;
+        int randy = rand.nextInt((DIMENSION2 - 100) - targets.getTargetSize()) + targets.getTargetSize() / 2 + 50;
         targets.addTarget(randx, randy);
     }
 
     // EFFECTS: saves the aimgame to file
-    public void saveAimGame() {
+    public boolean saveAimGame() {
         try {
             jsonWriter.open();
             jsonWriter.write(this);
             jsonWriter.close();
-            System.out.println("Saved game to " + JSON_STORE);
+            return true;
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
+            return false;
         }
     }
 

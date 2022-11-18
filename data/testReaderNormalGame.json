@@ -1,19 +1,24 @@
 {
-  "hits": 5,
-  "clicks": 6,
-  "targets": {"targets": [
-    {
-      "x": 201,
-      "y": 199
-    },
-    {
-      "x": 261,
-      "y": 438
-    },
-    {
-      "x": 658,
-      "y": 497
-    }
-  ]},
-  "starting targets": 3
+    "hits": 5,
+    "clicks": 6,
+    "targets": {
+        "target size": 20,
+        "targets": [
+            {
+                "size": 20,
+                "x": 201,
+                "y": 199
+            },
+            {
+                "size": 20,
+                "x": 261,
+                "y": 438
+            },
+            {
+                "size": 20,
+                "x": 658,
+                "y": 497
+            }
+    ]},
+    "starting targets": 3
 }

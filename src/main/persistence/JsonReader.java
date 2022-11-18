@@ -44,7 +44,8 @@ public class JsonReader {
         int startingTargs = jsonObject.getInt("starting targets");
         int hits = jsonObject.getInt("hits");
         int clicks = jsonObject.getInt("clicks");
-        AimGame g = new AimGame(startingTargs, true);
+        int size = jsonObject.getJSONObject("targets").getInt("target size");
+        AimGame g = new AimGame(startingTargs, size, true);
         g.setHits(hits);
         g.setClicks(clicks);
         addTargets(g, jsonObject);
