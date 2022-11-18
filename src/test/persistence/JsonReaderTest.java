@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import ui.AimGame;
 
 import java.io.IOException;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,6 +28,7 @@ public class JsonReaderTest extends JsonTest {
             AimGame g = reader.read();
             assertEquals(5, g.getHits());
             assertEquals(23, g.getClicks());
+            assertEquals(50, g.getTargetCollection().getTargetSize());
             assertEquals(0, g.getTargetCollection().getTargets().size());
             assertEquals(0, g.getStartingTargets());
         } catch (IOException e) {
@@ -43,12 +43,16 @@ public class JsonReaderTest extends JsonTest {
             AimGame g = reader.read();
             assertEquals(5, g.getHits());
             assertEquals(6, g.getClicks());
+            assertEquals(20, g.getTargetCollection().getTargetSize());
             assertEquals(3, g.getTargetCollection().getTargets().size());
             assertEquals(3, g.getStartingTargets());
 
             checkTarget(201, 199, g.getTargetCollection().getTargets().get(0));
+            assertEquals(20, g.getTargetCollection().getTargets().get(0).getSize());
             checkTarget(261, 438, g.getTargetCollection().getTargets().get(1));
+            assertEquals(20, g.getTargetCollection().getTargets().get(1).getSize());
             checkTarget(658, 497, g.getTargetCollection().getTargets().get(2));
+            assertEquals(20, g.getTargetCollection().getTargets().get(2).getSize());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

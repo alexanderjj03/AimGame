@@ -27,7 +27,8 @@ public class JsonWriterTest extends JsonTest {
     @Test
     void testWriterEmptyGame() { // no targets
         try {
-            AimGame g = new AimGame(0, SIZE, false); // so that no random targets are added
+            int newSize = 40;
+            AimGame g = new AimGame(0, newSize, false); // so that no random targets are added
             g.setClicks(40);
             g.setHits(25);
             g.setStartingTargets(3);
@@ -42,7 +43,7 @@ public class JsonWriterTest extends JsonTest {
             assertEquals(40, g.getClicks());
             assertEquals(0, g.getTargetCollection().getTargets().size());
             assertEquals(3, g.getStartingTargets());
-            assertEquals(SIZE, g.getTargetCollection().getTargetSize());
+            assertEquals(newSize, g.getTargetCollection().getTargetSize());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
@@ -69,11 +70,14 @@ public class JsonWriterTest extends JsonTest {
             assertEquals(69, g.getClicks());
             assertEquals(3, g.getTargetCollection().getTargets().size());
             assertEquals(5, g.getStartingTargets());
+            assertEquals(SIZE, g.getTargetCollection().getTargetSize());
 
             checkTarget(420, 69, g.getTargetCollection().getTargets().get(0));
             checkTarget(102, 550, g.getTargetCollection().getTargets().get(1));
             checkTarget(705, 336, g.getTargetCollection().getTargets().get(2));
             assertEquals(SIZE, g.getTargetCollection().getTargets().get(0).getSize());
+            assertEquals(SIZE, g.getTargetCollection().getTargets().get(1).getSize());
+            assertEquals(SIZE, g.getTargetCollection().getTargets().get(2).getSize());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
