@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.TargetCollection;
 import org.json.JSONObject;
 import persistence.JsonWriter;
@@ -97,6 +99,9 @@ public class AimGame extends JFrame implements Writable {
             addRandomTarget();
         } else if (keyCode == KeyEvent.VK_X) {
             endandSaveGame();
+            for (Event event :EventLog.getInstance()) {
+                System.out.println(event.toString());
+            }
             System.exit(0);
         }
     }

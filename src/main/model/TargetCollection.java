@@ -39,6 +39,8 @@ public class TargetCollection implements Writable {
     // EFFECTS:  A new target is added to targets at coordinates x, y with size targetSize
     public void addTarget(int x, int y) {
         targets.add(new Target(x, y, targetSize));
+        EventLog.getInstance().logEvent(
+                new Event("New target added to screen at " + x + ", " + y + "."));
     }
 
     // Removes a target from the screen
@@ -46,6 +48,11 @@ public class TargetCollection implements Writable {
     // EFFECTS:  The most recently added target in targets is removed from the list.
     public void removeTarget() {
         if (targets.size() >= 1) {
+            int lastTargetX = targets.get(targets.size() - 1).getX();
+            int lastTargetY = targets.get(targets.size() - 1).getY();
+            EventLog.getInstance().logEvent(
+                    new Event("Target at " + lastTargetX + ", " + lastTargetY
+                            + " was manually removed from screen."));
             targets.remove(targets.get(targets.size() - 1));
         }
     }
@@ -55,6 +62,8 @@ public class TargetCollection implements Writable {
     // EFFECTS:  All targets are removed from the list.
     public void clearTargets() {
         targets = new ArrayList<>();
+        EventLog.getInstance().logEvent(
+                new Event("All targets removed from screen."));
     }
 
     // Assumes a mouse pointer has clicked at coordinates x, y. If there is a target there, remove it, return true.
@@ -66,6 +75,9 @@ public class TargetCollection implements Writable {
         for (Target t : targets) {
             if (t.hasBeenClicked(x, y)) {
                 targets.remove(t);
+                EventLog.getInstance().logEvent(
+                        new Event("Target at " + t.getX() + ", " + t.getY() + " was clicked and "
+                                + "removed from screen."));
                 return true;
             }
         }

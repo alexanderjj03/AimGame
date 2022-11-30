@@ -35,10 +35,8 @@ to do so or not.
 - Have the option to load the saved game upon starting the application.
 - See my target accuracy on the screen (targets hit/times clicked)
 - Control the size of the targets that appear on the screen
-- (THE FOLLOWING STORIES HAVE NOT BEEN IMPLEMENTED YET)
-- Control the total number of targets that must be clicked for the game to end
 
-# Instructions for Grader
+### Instructions for Grader
 
 - You can generate the first required event related to adding Xs to a Y by
 clicking the spacebar when the game is active (after all the popups). This 
@@ -61,3 +59,23 @@ A popup should appear, asking whether you want to load your saved game. If you
 want to do this, say yes. If you select no, a new game will be created. You will
 be prompted to enter how many targets you want on screen at the start of the game,
 and how big you want the targets that appear to be.
+
+### Phase 4: Task 2 (events that typically occur)
+
+- New target added to screen at 122, 148.
+- New target added to screen at 337, 435.
+- Target at 337, 435 was clicked and removed from screen.
+- New target added to screen at 340, 167.
+- Target at 122, 148 was clicked and removed from screen.
+- New target added to screen at 43, 105.
+- Target at 43, 105 was manually removed from screen.
+- Target at 340, 167 was clicked and removed from screen.
+- New target added to screen at 493, 574.
+- All targets removed from screen.
+- New target added to screen at 289, 206.
+- Target at 289, 206 was clicked and removed from screen.
+- New target added to screen at 593, 101.
+
+The eventlog printed after the program ends also prints the dates for 
+when each event occurs. I removed these here, as they clutter the
+eventlog, making it harder to understand what events actually happened.
