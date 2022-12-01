@@ -1,12 +1,12 @@
 {
-    "hits": 1,
-    "clicks": 1,
+    "hits": 4,
+    "clicks": 4,
     "targets": {
         "target size": 30,
         "targets": [{
             "size": 30,
-            "x": 593,
-            "y": 101
+            "x": 704,
+            "y": 400
         }]
     },
     "starting targets": 2

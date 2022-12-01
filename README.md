@@ -79,3 +79,14 @@ and how big you want the targets that appear to be.
 The eventlog printed after the program ends also prints the dates for 
 when each event occurs. I removed these here, as they clutter the
 eventlog, making it harder to understand what events actually happened.
+
+### Phase 4: Task 3
+
+If I had more time to work on my project, I would make two main changes.
+For one, I would merge Main and AimFrame. The only purpose of Main is to 
+create a new AimFrame. I tried to merge these two classes without success.
+
+In addition, as is, AimFrame calls JsonReader and AimGame calls JsonWriter.
+As JsonReader and JsonWriter go hand in hand, I would refactor my project so
+that AimFrame calls both JsonReader and JsonWriter. This would require a lot
+of work, however.
