@@ -2,6 +2,8 @@
 
 ## By Alexander Jacobson (66453994)
 
+### Made as part of a project for CPSC 210 (UBC class)
+
 As the title suggests, this application will help a user improve their aim
 with a mouse. It will create a blank screen, and one or multiple "targets" 
 (small circles) will appear at a random locations on the screen. When the 
